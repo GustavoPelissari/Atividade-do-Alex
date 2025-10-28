@@ -5,6 +5,8 @@ use App\Http\Controllers\ProdutoController;
 use App\Models\Client;
 use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaAtividadesController;
+use App\Http\Controllers\TarefasAtividadesController;
 
 
 Route::get('/', function () {
@@ -25,3 +27,5 @@ Route::get('/clients/{id}', [ClientController::class, 'show']) ->name('clients.s
 // Route::get('/produtos/{idProduto}', function ($idProduto) {
 //     return Produto::get() ;
 // });
+Route::resource('categorias', CategoriaAtividadesController::class);
+Route::resource('tarefas', TarefasAtividadesController::class);
