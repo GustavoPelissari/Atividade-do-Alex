@@ -1,0 +1,20 @@
+Vendor é a pasta de dependências do código php, semelhante a NodeModules
+
+Vendor não pode ser enviada nem upada no Git
+
+O arquivo composer.json é igual ao arquivo package.json do Node
+
+.env não pode ser upada para o Git também, pois tem informações confidenciais com a do Banco de Dados
+
+.env.example pode ser upada pois tem informações porém, nenhuma é confidencial
+
+As tabelas no banco criadas por migration não podem ser alteradas caso eu mude o código da migration e execute o php artisan migrate
+
+
+Comandos ///
+
+composer install --  é o comando para instalarmos as dependências do código php
+php artisan serve --  é o código responsável por iniciar o servidor
+php artisan make:model NomeModel -m -- Cria a Model e também cria a migration do client
+php artisan migrate --- Para verificar as tabelas do banco de dados, caso não tenha ele irá criar as migrates no banco
+php artisan make:controller ClientController --- Cria Controllers, nesse caso a de Cliente
