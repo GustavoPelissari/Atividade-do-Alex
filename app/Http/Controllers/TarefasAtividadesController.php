@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tarefasAtividades;
+use App\Models\Tarefa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -36,51 +36,13 @@ class TarefasAtividadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'titulo' => 'required',
+            'categoria_id' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\tarefasAtividades  $tarefasAtividades
-     * @return \Illuminate\Http\Response
-     */
-    public function show(tarefasAtividades $tarefasAtividades)
-    {
-        //
-    }
+        Tarefa::create($request->all());
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\tarefasAtividades  $tarefasAtividades
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(tarefasAtividades $tarefasAtividades)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\tarefasAtividades  $tarefasAtividades
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, tarefasAtividades $tarefasAtividades)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\tarefasAtividades  $tarefasAtividades
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(tarefasAtividades $tarefasAtividades)
-    {
-        //
+        return redirect()->route('tarefas.index');
     }
 }

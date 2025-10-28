@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tarefas_atividades', function (Blueprint $table) {
+        Schema::create('tarefas', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
+            $table->text('descricao')->nullable();
+            $table->boolean('concluida')->default(false);
+            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->string('nome', 100);
-            $table->string('descrição', 100);
-            $table->date('dia');
-            $table->string('local', 100);
         });
     }
 

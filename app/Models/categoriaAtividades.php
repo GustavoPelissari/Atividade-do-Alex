@@ -5,7 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class categoriaAtividades extends Model
+class Categoria extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nome'];
+
+    public function tarefas() {
+        return $this->hasMany(Tarefa::class);
+    }
 }
+

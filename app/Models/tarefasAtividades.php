@@ -5,7 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tarefasAtividades extends Model
+class Tarefa extends Model
 {
-    use HasFactory;
+    protected $fillable = ['titulo', 'descricao', 'concluida', 'categoria_id'];
+
+    public function categoria() {
+        return $this->belongsTo(Categoria::class);
+    }
 }
+

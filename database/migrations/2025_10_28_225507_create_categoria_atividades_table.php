@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_atividades', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
             $table->timestamps();
-            $table->string('trabalho', 100);
-            $table->string('estudo', 100);
-            $table->string('pessoal', 100);
-            $table->string('hobby', 100);
         });
     }
 
