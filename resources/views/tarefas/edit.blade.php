@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Criar Nova Tarefa')
+@section('title', 'Editar Tarefa')
 
 @section('content')
 <div class="row justify-content-center">
@@ -8,12 +8,13 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-0">
-                    <i class="bi bi-plus-circle"></i> Criar Nova Tarefa
+                    <i class="bi bi-pencil"></i> Editar Tarefa
                 </h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('tarefas.store') }}" method="POST">
+                <form action="{{ route('tarefas.update', $tarefa->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Título *</label>
@@ -21,7 +22,7 @@
                                name="titulo" 
                                id="titulo"
                                class="form-control @error('titulo') is-invalid @enderror" 
-                               value="{{ old('titulo') }}"
+                               value="{{ old('titulo', $tarefa->titulo) }}"
                                placeholder="Digite o título da tarefa" 
                                required>
                         @error('titulo')
@@ -35,7 +36,7 @@
                                   id="descricao"
                                   class="form-control @error('descricao') is-invalid @enderror" 
                                   rows="4"
-                                  placeholder="Digite uma descrição detalhada da tarefa">{{ old('descricao') }}</textarea>
+                                  placeholder="Digite uma descrição detalhada da tarefa">{{ old('descricao', $tarefa->descricao) }}</textarea>
                         @error('descricao')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -50,7 +51,7 @@
                             <option value="">Selecione uma categoria</option>
                             @foreach($categorias as $categoria)
                                 <option value="{{ $categoria->id }}" 
-                                        {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                        {{ old('categoria_id', $tarefa->categoria_id) == $categoria->id ? 'selected' : '' }}>
                                     {{ $categoria->nome }}
                                 </option>
                             @endforeach
@@ -60,12 +61,26 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" 
+                                   type="checkbox" 
+                                   name="concluida" 
+                                   id="concluida"
+                                   value="1"
+                                   {{ old('concluida', $tarefa->concluida) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="concluida">
+                                <i class="bi bi-check-square"></i> Marcar como concluída
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('tarefas.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i> Voltar
                         </a>
-                        <button type="submit" class="btn btn-success">
-                            <i class="bi bi-save"></i> Salvar Tarefa
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Atualizar Tarefa
                         </button>
                     </div>
                 </form>
